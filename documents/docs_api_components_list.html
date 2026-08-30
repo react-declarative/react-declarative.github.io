@@ -1,0 +1,151 @@
+<!DOCTYPE html><html class="default" lang="en" data-base=".."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>docs/api/components/list | react-declarative</title><meta name="description" content="Documentation for react-declarative"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">react-declarative</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb"><li><a href="../modules.html">react-declarative</a></li><li><a href="docs_api_components_list.html">docs/api/components/list</a></li></ul></div><div class="tsd-panel tsd-typography"><a id="list-component-props-columns-handler-actions-reference" class="tsd-anchor"></a><h1 class="tsd-anchor-link">List component props: columns, handler, actions reference<a href="#list-component-props-columns-handler-actions-reference" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h1><p><code>List</code> is a batteries-included data grid component. You supply a <code>handler</code> function that receives the current filter state, pagination, sort model, chip toggles, and search string, then returns a page of rows. <code>List</code> handles the rest: rendering columns, paginating results, collecting filter form values via a <code>One</code>-compatible <code>filters</code> schema, and wiring up toolbar actions and per-row menus. The component is generic over <code>FilterData</code> (filter form shape), <code>RowData</code> (row object shape), and <code>Payload</code> (extra context).</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">List</span><span class="hl-1">, </span><span class="hl-2">FieldType</span><span class="hl-1">, </span><span class="hl-2">ColumnType</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">interface</span><span class="hl-1"> </span><span class="hl-7">IFilters</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-2">status</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-4">interface</span><span class="hl-1"> </span><span class="hl-7">IRow</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-2">id</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-2">name</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-2">status</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-2">createdAt</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-0">default</span><span class="hl-1"> </span><span class="hl-4">function</span><span class="hl-1"> </span><span class="hl-5">UserList</span><span class="hl-1">() {</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> (</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">List</span><span class="hl-1">&lt;</span><span class="hl-7">IFilters</span><span class="hl-1">, </span><span class="hl-7">IRow</span><span class="hl-1">&gt;</span><br/><span class="hl-1">      </span><span class="hl-8">handler</span><span class="hl-1">=</span><span class="hl-4">{async</span><span class="hl-9"> (</span><span class="hl-2">filterData</span><span class="hl-9">, </span><span class="hl-2">pagination</span><span class="hl-9">, </span><span class="hl-2">sort</span><span class="hl-9">, </span><span class="hl-2">chips</span><span class="hl-9">, </span><span class="hl-2">search</span><span class="hl-9">) </span><span class="hl-4">=&gt;</span><span class="hl-9"> {</span><br/><span class="hl-9">        </span><span class="hl-4">const</span><span class="hl-9"> </span><span class="hl-10">res</span><span class="hl-9"> </span><span class="hl-1">=</span><span class="hl-9"> </span><span class="hl-0">await</span><span class="hl-9"> </span><span class="hl-5">fetch</span><span class="hl-9">(</span><br/><span class="hl-9">          </span><span class="hl-3">`/api/users?page=</span><span class="hl-4">${</span><span class="hl-2">pagination</span><span class="hl-9">.</span><span class="hl-2">offset</span><span class="hl-9"> </span><span class="hl-1">/</span><span class="hl-9"> </span><span class="hl-2">pagination</span><span class="hl-9">.</span><span class="hl-2">limit</span><span class="hl-4">}</span><span class="hl-3">&amp;q=</span><span class="hl-4">${</span><span class="hl-2">search</span><span class="hl-4">}</span><span class="hl-3">`</span><br/><span class="hl-9">        );</span><br/><span class="hl-9">        </span><span class="hl-4">const</span><span class="hl-9"> { </span><span class="hl-10">rows</span><span class="hl-9">, </span><span class="hl-10">total</span><span class="hl-9"> } </span><span class="hl-1">=</span><span class="hl-9"> </span><span class="hl-0">await</span><span class="hl-9"> </span><span class="hl-2">res</span><span class="hl-9">.</span><span class="hl-5">json</span><span class="hl-9">();</span><br/><span class="hl-9">        </span><span class="hl-0">return</span><span class="hl-9"> { </span><span class="hl-2">rows</span><span class="hl-9">, </span><span class="hl-2">total</span><span class="hl-9"> };</span><br/><span class="hl-9">      }</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">columns</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-9">[</span><br/><span class="hl-9">        { </span><span class="hl-2">type:</span><span class="hl-9"> </span><span class="hl-2">ColumnType</span><span class="hl-9">.</span><span class="hl-2">Text</span><span class="hl-9">, </span><span class="hl-2">field:</span><span class="hl-9"> </span><span class="hl-3">&quot;name&quot;</span><span class="hl-9">, </span><span class="hl-2">headerName:</span><span class="hl-9"> </span><span class="hl-3">&quot;Name&quot;</span><span class="hl-9">, </span><span class="hl-2">width:</span><span class="hl-9"> </span><span class="hl-3">&quot;auto&quot;</span><span class="hl-9"> },</span><br/><span class="hl-9">        { </span><span class="hl-2">type:</span><span class="hl-9"> </span><span class="hl-2">ColumnType</span><span class="hl-9">.</span><span class="hl-2">Text</span><span class="hl-9">, </span><span class="hl-2">field:</span><span class="hl-9"> </span><span class="hl-3">&quot;status&quot;</span><span class="hl-9">, </span><span class="hl-2">headerName:</span><span class="hl-9"> </span><span class="hl-3">&quot;Status&quot;</span><span class="hl-9">, </span><span class="hl-2">width:</span><span class="hl-9"> </span><span class="hl-3">&quot;120px&quot;</span><span class="hl-9"> },</span><br/><span class="hl-9">        { </span><span class="hl-2">type:</span><span class="hl-9"> </span><span class="hl-2">ColumnType</span><span class="hl-9">.</span><span class="hl-2">Text</span><span class="hl-9">, </span><span class="hl-2">field:</span><span class="hl-9"> </span><span class="hl-3">&quot;createdAt&quot;</span><span class="hl-9">, </span><span class="hl-2">headerName:</span><span class="hl-9"> </span><span class="hl-3">&quot;Created&quot;</span><span class="hl-9">, </span><span class="hl-2">width:</span><span class="hl-9"> </span><span class="hl-3">&quot;180px&quot;</span><span class="hl-9"> },</span><br/><span class="hl-9">      ]</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">filters</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-9">[</span><br/><span class="hl-9">        { </span><span class="hl-2">type:</span><span class="hl-9"> </span><span class="hl-2">FieldType</span><span class="hl-9">.</span><span class="hl-2">Text</span><span class="hl-9">, </span><span class="hl-2">name:</span><span class="hl-9"> </span><span class="hl-3">&quot;status&quot;</span><span class="hl-9">, </span><span class="hl-2">title:</span><span class="hl-9"> </span><span class="hl-3">&quot;Status&quot;</span><span class="hl-9"> },</span><br/><span class="hl-9">      ]</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">withSearch</span><br/><span class="hl-1">    </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">  );</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="data" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Data<a href="#data" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>handler</code></strong> <code>ListHandler&lt;FilterData, RowData, Payload&gt;</code> (required)</p>
+<p>The data-fetching function. Receives <code>(filterData, pagination, sort, chips, search, payload)</code> and must return either <code>RowData[]</code> (total assumed unknown) or <code>{ rows: RowData[], total: number | null }</code>. Can be async. You can also pass a static <code>RowData[]</code> array for client-side-only lists.</p>
+<hr>
+<p><strong><code>columns</code></strong> <code>IColumn&lt;FilterData, RowData, Payload&gt;[]</code> (required)</p>
+<p>Column definitions. Each entry describes one visible column in the grid. See the <a href="#icolumn-fields">IColumn fields</a> section below.</p>
+<hr>
+<p><strong><code>filters</code></strong> <code>Field[]</code></p>
+<p>Field schema (same format as <code>One</code>'s <code>fields</code> prop) used to render the filter panel. When the user submits the filter form, <code>handler</code> is re-called with the new <code>filterData</code>.</p>
+<hr>
+<p><strong><code>payload</code></strong> <code>Payload | (() =&gt; Payload)</code></p>
+<p>Arbitrary context forwarded to <code>handler</code>, column <code>compute</code> callbacks, action visibility checks, and filter field callbacks. Use it for user identity, tenant IDs, or other cross-cutting values.</p>
+<hr>
+<p><strong><code>filterData</code></strong> <code>Partial&lt;FilterData&gt;</code></p>
+<p>Pre-populate the filter form with specific values on first render.</p>
+<hr>
+<p><strong><code>selectedRows</code></strong> <code>RowId[]</code></p>
+<p>Controlled selection state. Pass an array of row IDs to externally control which rows appear selected.</p>
+<hr>
+<p><strong><code>sortModel</code></strong> <code>IListSortItem&lt;RowData&gt;[]</code></p>
+<p>Initial sort model applied when the list first renders. Each item is <code>{ field: keyof RowData, sort: 'asc' | 'desc' }</code>.</p>
+<hr>
+<p><strong><code>chipData</code></strong> <code>Partial&lt;Record&lt;keyof RowData, boolean&gt;&gt;</code></p>
+<p>Initial enabled/disabled state of each chip toggle. Keys are <code>RowData</code> field names; values are booleans.</p>
+<hr>
+<p><strong><code>search</code></strong> <code>string</code></p>
+<p>Pre-populate the search box with a string value on first render.</p>
+<a id="columns-icolumn" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Columns (<code>IColumn</code>)<a href="#columns-icolumn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>type</code></strong> <code>ColumnType</code> (required)</p>
+<p>Rendering strategy for the column. Common values: <code>ColumnType.Text</code>, <code>ColumnType.Action</code>, <code>ColumnType.CheckBox</code>, <code>ColumnType.Component</code>.</p>
+<hr>
+<p><strong><code>field</code></strong> <code>string</code></p>
+<p>Key in <code>RowData</code> whose value this column displays. Omit when the column content is fully derived via <code>compute</code> or <code>element</code>.</p>
+<hr>
+<p><strong><code>headerName</code></strong> <code>string</code></p>
+<p>Column header label shown in the grid header row.</p>
+<hr>
+<p><strong><code>width</code></strong> <code>string | ((containerWidth: number) =&gt; string | number)</code> (required)</p>
+<p>Column width. Pass a CSS string such as <code>&quot;200px&quot;</code> or <code>&quot;auto&quot;</code>, or a function that receives the grid container width and returns a value.</p>
+<hr>
+<p><strong><code>sortable</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, clicking the column header cycles through ascending / descending sort. The active sort is passed to <code>handler</code> on every re-fetch.</p>
+<hr>
+<p><strong><code>compute</code></strong> <code>(row: RowData &amp; { _payload: Payload }, payload: Payload) =&gt; Promise&lt;Value&gt; | Value</code></p>
+<p>Derive the displayed value from the row instead of reading <code>field</code> directly. Runs for every visible row on each render. Can be async.</p>
+<hr>
+<p><strong><code>element</code></strong> <code>React.ComponentType&lt;RowData &amp; { _payload: Payload }&gt;</code></p>
+<p>Replace the default cell renderer with your own React component. The component receives the full row object plus <code>_payload</code>.</p>
+<hr>
+<p><strong><code>columnMenu</code></strong> <code>IListActionOption[]</code></p>
+<p>Per-column action menu items. Each item has <code>label</code>, <code>action</code>, optional <code>icon</code>, and optional <code>isVisible</code>/<code>isDisabled</code> callbacks that receive <code>selectedRows</code> and <code>payload</code>.</p>
+<hr>
+<p><strong><code>isVisible</code></strong> <code>(params: { filterData, pagination, sortModel, chips, search, payload }) =&gt; boolean</code></p>
+<p>Conditionally hide the entire column based on the current list state. Called with the same params as <code>handler</code>.</p>
+<hr>
+<p><strong><code>primary</code></strong> <code>boolean</code></p>
+<p>Marks the column as the primary identifier column, used for mobile layout prioritisation.</p>
+<hr>
+<p><strong><code>phoneHidden</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, this column is hidden on phone-sized viewports.</p>
+<hr>
+<p><strong><code>tabletHidden</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, this column is hidden on tablet-sized viewports.</p>
+<a id="actions-and-operations" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Actions and operations<a href="#actions-and-operations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>actions</code></strong> <code>IListAction&lt;RowData, Payload&gt;[]</code></p>
+<p>Toolbar-level action buttons rendered above the grid. Each action has a <code>type</code> (<code>ActionType</code>), optional <code>label</code>, optional <code>icon</code>, and optional <code>options</code> array for dropdown sub-actions. <code>isVisible</code> and <code>isDisabled</code> receive the current <code>selectedRows</code> and <code>payload</code>.</p>
+<hr>
+<p><strong><code>operations</code></strong> <code>IListOperation&lt;RowData, Payload&gt;[]</code></p>
+<p>Bulk operations shown when one or more rows are selected. Rendered in the selection toolbar.</p>
+<hr>
+<p><strong><code>rowActions</code></strong> <code>IListRowAction[]</code></p>
+<p>Per-row action menu items accessible through a context menu icon on each row. Each item specifies a <code>label</code>, <code>action</code> string, and optional visibility/disabled predicates.</p>
+<hr>
+<p><strong><code>chips</code></strong> <code>IListChip&lt;RowData&gt;[]</code></p>
+<p>Quick-filter chip toggles rendered above the grid. Each chip has <code>name</code> (a <code>keyof RowData</code>), <code>label</code>, optional <code>color</code>, and an <code>enabled</code> default. Active chips are passed to <code>handler</code> as a <code>Record&lt;keyof RowData, boolean&gt;</code>.</p>
+<a id="callbacks" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Callbacks<a href="#callbacks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>onRowClick</code></strong> <code>(row: RowData, reload: (keepPagination?: boolean) =&gt; Promise&lt;void&gt;) =&gt; void</code></p>
+<p>Called when the user clicks anywhere on a row. The second argument is a <code>reload</code> function you can call to refresh the list without navigating away.</p>
+<hr>
+<p><strong><code>onAction</code></strong> <code>(action: string, selectedRows: RowData[], reload: ReloadFn) =&gt; void</code></p>
+<p>Called when a toolbar action is triggered. <code>action</code> is the string identifier from the action definition.</p>
+<hr>
+<p><strong><code>onRowAction</code></strong> <code>(action: string, row: RowData, reload: ReloadFn) =&gt; void</code></p>
+<p>Called when a per-row action menu item is activated. <code>action</code> is the item's <code>action</code> string.</p>
+<hr>
+<p><strong><code>onOperation</code></strong> <code>(action: string, selectedRows: RowData[], isAll: boolean, reload: ReloadFn) =&gt; void</code></p>
+<p>Called when a bulk operation is triggered. <code>isAll</code> is <code>true</code> when the user selected all rows across all pages.</p>
+<hr>
+<p><strong><code>onSelectedRows</code></strong> <code>(rowIds: RowId[], initialChange: boolean) =&gt; void</code></p>
+<p>Called when the selection changes. <code>initialChange</code> is <code>true</code> for the event fired on mount.</p>
+<hr>
+<p><strong><code>onFilterChange</code></strong> <code>(data: FilterData) =&gt; void</code></p>
+<p>Called whenever the filter form values change.</p>
+<hr>
+<p><strong><code>onSearchChange</code></strong> <code>(search: string) =&gt; void</code></p>
+<p>Called whenever the search box value changes.</p>
+<hr>
+<p><strong><code>onSortModelChange</code></strong> <code>(sort: IListSortItem&lt;RowData&gt;[]) =&gt; void</code></p>
+<p>Called when the sort model changes (e.g. the user clicks a sortable column header).</p>
+<hr>
+<p><strong><code>onRows</code></strong> <code>(rows: RowData[]) =&gt; void</code></p>
+<p>Called after each successful data load with the full array of currently displayed rows.</p>
+<hr>
+<p><strong><code>fallback</code></strong> <code>(e: Error) =&gt; void</code></p>
+<p>Called if <code>handler</code> rejects. Use it to display an error message.</p>
+<hr>
+<p><strong><code>onLoadStart</code></strong> <code>(source: string) =&gt; void</code></p>
+<p>Called when a data fetch begins.</p>
+<hr>
+<p><strong><code>onLoadEnd</code></strong> <code>(isOk: boolean, source: string) =&gt; void</code></p>
+<p>Called when a data fetch completes. <code>isOk</code> is <code>false</code> on error.</p>
+<a id="flags" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Flags<a href="#flags" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>withSearch</code></strong> <code>boolean</code></p>
+<p>Show a search input in the toolbar. The current search string is passed to <code>handler</code> on every re-fetch.</p>
+<hr>
+<p><strong><code>withMobile</code></strong> <code>boolean</code></p>
+<p>Enable the responsive mobile layout, which reorders and hides columns according to each column's <code>phoneOrder</code> and <code>phoneHidden</code> settings.</p>
+<hr>
+<p><strong><code>withArrowPagination</code></strong> <code>boolean</code></p>
+<p>Replace the default page-number pagination controls with simple previous/next arrow buttons.</p>
+<hr>
+<p><strong><code>withRangePagination</code></strong> <code>boolean</code></p>
+<p>Show a page range selector alongside the arrow controls.</p>
+<hr>
+<p><strong><code>withSingleSort</code></strong> <code>boolean</code></p>
+<p>Restrict sorting to a single column at a time, clearing any existing sort when the user clicks a new column header.</p>
+<hr>
+<p><strong><code>withSelectOnRowClick</code></strong> <code>boolean</code></p>
+<p>Toggle row selection when the user clicks a row body (in addition to clicking the checkbox).</p>
+<hr>
+<p><strong><code>withToggledFilters</code></strong> <code>boolean</code></p>
+<p>Start with the filter panel collapsed. The user can expand it via a toolbar toggle button.</p>
+<hr>
+<p><strong><code>selectionMode</code></strong> <code>SelectionMode</code></p>
+<p>Controls how rows can be selected. Typical values: <code>SelectionMode.None</code>, <code>SelectionMode.Single</code>, <code>SelectionMode.Multiple</code>.</p>
+<a id="pagination-and-limits" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Pagination and limits<a href="#pagination-and-limits" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>limit</code></strong> <code>number</code></p>
+<p>Initial page size (number of rows per page). Defaults to the first entry in <code>rowsPerPage</code>.</p>
+<hr>
+<p><strong><code>page</code></strong> <code>number</code></p>
+<p>Initial page index (zero-based).</p>
+<hr>
+<p><strong><code>rowsPerPage</code></strong> <code>Array&lt;number | { value: number; label: string }&gt;</code></p>
+<p>Options shown in the rows-per-page selector. Pass plain numbers or <code>{ value, label }</code> objects for custom labels.</p>
+<a id="subjects-reactive-control" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Subjects (reactive control)<a href="#subjects-reactive-control" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>reloadSubject</code></strong> <code>TSubject&lt;void&gt;</code></p>
+<p>Emit on this subject to trigger a fresh <code>handler</code> call programmatically without unmounting the component.</p>
+<hr>
+<p><strong><code>rerenderSubject</code></strong> <code>TSubject&lt;void&gt;</code></p>
+<p>Emit to force a visual re-render without re-fetching data.</p>
+<hr>
+<p><strong><code>setFilterDataSubject</code></strong> <code>TSubject&lt;FilterData&gt;</code></p>
+<p>Emit a <code>FilterData</code> object to programmatically update the filter form values and re-fetch.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#list-component-props-columns-handler-actions-reference"><span>List component props: columns, handler, actions reference</span></a><ul><li><a href="#data"><span>Data</span></a></li><li><a href="#columns-icolumn"><span>Columns (IColumn)</span></a></li><li><a href="#actions-and-operations"><span>Actions and operations</span></a></li><li><a href="#callbacks"><span>Callbacks</span></a></li><li><a href="#flags"><span>Flags</span></a></li><li><a href="#pagination-and-limits"><span>Pagination and limits</span></a></li><li><a href="#subjects-reactive-control"><span>Subjects (reactive control)</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="../modules.html">react-declarative</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

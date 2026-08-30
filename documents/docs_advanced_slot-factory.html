@@ -1,0 +1,170 @@
+<!DOCTYPE html><html class="default" lang="en" data-base=".."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>docs/advanced/slot-factory | react-declarative</title><meta name="description" content="Documentation for react-declarative"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">react-declarative</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb"><li><a href="../modules.html">react-declarative</a></li><li><a href="docs_advanced_slot-factory.html">docs/advanced/slot-factory</a></li></ul></div><div class="tsd-panel tsd-typography"><a id="customizing-field-renderers-with-slotfactory" class="tsd-anchor"></a><h1 class="tsd-anchor-link">Customizing field renderers with SlotFactory<a href="#customizing-field-renderers-with-slotfactory" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h1><p><code>OneSlotFactory</code> and <code>ListSlotFactory</code> let you swap out every field renderer that <code>&lt;One /&gt;</code> and <code>&lt;List /&gt;</code> use internally. You wrap your form tree with the factory component, pass your custom components as props, and the library uses them everywhere inside that subtree instead of the built-in MUI implementations. Your JSON schemas stay completely unchanged—only the visual layer is replaced.</p>
+<a id="oneslotfactory" class="tsd-anchor"></a><h2 class="tsd-anchor-link">OneSlotFactory<a href="#oneslotfactory" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><code>OneSlotFactory</code> accepts one prop for each field type. All props are optional; you only override the slots you want to change.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">OneSlotFactory</span><span class="hl-1">, </span><span class="hl-2">One</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MyTextInput</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;./MyTextInput&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MyCheckBox</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;./MyCheckBox&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">App</span><span class="hl-1"> = () </span><span class="hl-4">=&gt;</span><span class="hl-1"> (</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;</span><span class="hl-7">OneSlotFactory</span><span class="hl-1"> </span><span class="hl-8">Text</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">MyTextInput</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-8">CheckBox</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">MyCheckBox</span><span class="hl-4">}</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">One</span><span class="hl-1"> </span><span class="hl-8">fields</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">fields</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-8">handler</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">handler</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-8">onChange</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">handleChange</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;/</span><span class="hl-7">OneSlotFactory</span><span class="hl-6">&gt;</span><br/><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="available-slots" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Available slots<a href="#available-slots" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Each slot name corresponds to a <code>FieldType</code> value. Your replacement component must accept the matching slot interface as its props.</p>
+<table>
+<thead>
+<tr>
+<th>Slot name</th>
+<th>Interface</th>
+<th>Renders when <code>type</code> is…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Text</code></td>
+<td><code>ITextSlot</code></td>
+<td><code>FieldType.Text</code></td>
+</tr>
+<tr>
+<td><code>CheckBox</code></td>
+<td><code>ICheckBoxSlot</code></td>
+<td><code>FieldType.CheckBox</code></td>
+</tr>
+<tr>
+<td><code>Radio</code></td>
+<td><code>IRadioSlot</code></td>
+<td><code>FieldType.Radio</code></td>
+</tr>
+<tr>
+<td><code>Combo</code></td>
+<td><code>IComboSlot</code></td>
+<td><code>FieldType.Combo</code></td>
+</tr>
+<tr>
+<td><code>Items</code></td>
+<td><code>IItemsSlot</code></td>
+<td><code>FieldType.Items</code></td>
+</tr>
+<tr>
+<td><code>Choose</code></td>
+<td><code>IChooseSlot</code></td>
+<td><code>FieldType.Choose</code></td>
+</tr>
+<tr>
+<td><code>Date</code></td>
+<td><code>IDateSlot</code></td>
+<td><code>FieldType.Date</code></td>
+</tr>
+<tr>
+<td><code>Time</code></td>
+<td><code>ITimeSlot</code></td>
+<td><code>FieldType.Time</code></td>
+</tr>
+<tr>
+<td><code>Switch</code></td>
+<td><code>ISwitchSlot</code></td>
+<td><code>FieldType.Switch</code></td>
+</tr>
+<tr>
+<td><code>YesNo</code></td>
+<td><code>IYesNoSlot</code></td>
+<td><code>FieldType.YesNo</code></td>
+</tr>
+<tr>
+<td><code>Slider</code></td>
+<td><code>ISliderSlot</code></td>
+<td><code>FieldType.Slider</code></td>
+</tr>
+<tr>
+<td><code>Rating</code></td>
+<td><code>IRatingSlot</code></td>
+<td><code>FieldType.Rating</code></td>
+</tr>
+<tr>
+<td><code>Progress</code></td>
+<td><code>IProgressSlot</code></td>
+<td><code>FieldType.Progress</code></td>
+</tr>
+<tr>
+<td><code>File</code></td>
+<td><code>IFileSlot</code></td>
+<td><code>FieldType.File</code></td>
+</tr>
+<tr>
+<td><code>Dict</code></td>
+<td><code>IDictSlot</code></td>
+<td><code>FieldType.Dict</code></td>
+</tr>
+<tr>
+<td><code>Tree</code></td>
+<td><code>ITreeSlot</code></td>
+<td><code>FieldType.Tree</code></td>
+</tr>
+<tr>
+<td><code>Complete</code></td>
+<td><code>ICompleteSlot</code></td>
+<td><code>FieldType.Complete</code></td>
+</tr>
+<tr>
+<td><code>Typography</code></td>
+<td><code>ITypographySlot</code></td>
+<td><code>FieldType.Typography</code></td>
+</tr>
+<tr>
+<td><code>Button</code></td>
+<td><code>IButtonSlot</code></td>
+<td><code>FieldType.Button</code></td>
+</tr>
+<tr>
+<td><code>Icon</code></td>
+<td><code>IIconSlot</code></td>
+<td><code>FieldType.Icon</code></td>
+</tr>
+<tr>
+<td><code>Line</code></td>
+<td><code>ILineSlot</code></td>
+<td><code>FieldType.Line</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> <code>OneSlotFactory</code> merges with any outer <code>OneSlotFactory</code> in the component tree. Inner factories override outer ones, so you can layer them for section-specific overrides.</p>
+</blockquote>
+<a id="writing-a-custom-slot" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Writing a custom slot<a href="#writing-a-custom-slot" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Your component receives the slot interface as its props. The <code>value</code> and <code>onChange</code> props are the most important ones: <code>value</code> is the current field value (already resolved by <code>&lt;One /&gt;</code>'s state engine) and <code>onChange</code> is the callback you call when the value changes.</p>
+<p><strong>Step 1: Define the slot interface import</strong></p>
+<p>Import the slot interface that matches the field type you want to replace.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">ITextSlot</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>Step 2: Implement the component</strong></p>
+<p>Use the interface as the component's props type. You must call <code>onChange</code> with the new value whenever the input changes.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">ITextSlot</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">MyTextInput</span><span class="hl-1"> = ({</span><br/><span class="hl-1">  </span><span class="hl-2">value</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">onChange</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">title</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">placeholder</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">disabled</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">readonly</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">invalid</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">dirty</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">description</span><span class="hl-1">,</span><br/><span class="hl-1">}: </span><span class="hl-7">ITextSlot</span><span class="hl-1">) </span><span class="hl-4">=&gt;</span><span class="hl-1"> (</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;</span><span class="hl-18">div</span><span class="hl-1"> </span><span class="hl-8">className</span><span class="hl-1">=</span><span class="hl-3">&quot;my-field&quot;</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-18">label</span><span class="hl-6">&gt;</span><span class="hl-4">{</span><span class="hl-2">title</span><span class="hl-4">}</span><span class="hl-6">&lt;/</span><span class="hl-18">label</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-18">input</span><br/><span class="hl-1">      </span><span class="hl-8">value</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-5">String</span><span class="hl-9">(</span><span class="hl-2">value</span><span class="hl-9"> </span><span class="hl-1">??</span><span class="hl-9"> </span><span class="hl-3">&quot;&quot;</span><span class="hl-9">)</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">placeholder</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">placeholder</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">disabled</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">disabled</span><span class="hl-9"> </span><span class="hl-1">||</span><span class="hl-9"> </span><span class="hl-2">readonly</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">onChange</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-9">(</span><span class="hl-2">e</span><span class="hl-9">) </span><span class="hl-4">=&gt;</span><span class="hl-9"> </span><span class="hl-5">onChange</span><span class="hl-9">(</span><span class="hl-2">e</span><span class="hl-9">.</span><span class="hl-2">target</span><span class="hl-9">.</span><span class="hl-2">value</span><span class="hl-9">)</span><span class="hl-4">}</span><br/><span class="hl-1">    </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">    </span><span class="hl-4">{</span><span class="hl-2">dirty</span><span class="hl-9"> </span><span class="hl-1">&amp;&amp;</span><span class="hl-9"> </span><span class="hl-2">invalid</span><span class="hl-9"> </span><span class="hl-1">&amp;&amp;</span><span class="hl-9"> (</span><br/><span class="hl-9">      </span><span class="hl-6">&lt;</span><span class="hl-18">span</span><span class="hl-9"> </span><span class="hl-8">className</span><span class="hl-1">=</span><span class="hl-3">&quot;error&quot;</span><span class="hl-6">&gt;</span><span class="hl-4">{</span><span class="hl-2">invalid</span><span class="hl-4">}</span><span class="hl-6">&lt;/</span><span class="hl-18">span</span><span class="hl-6">&gt;</span><br/><span class="hl-9">    )</span><span class="hl-4">}</span><br/><span class="hl-1">    </span><span class="hl-4">{</span><span class="hl-2">description</span><span class="hl-9"> </span><span class="hl-1">&amp;&amp;</span><span class="hl-9"> </span><span class="hl-6">&lt;</span><span class="hl-18">span</span><span class="hl-9"> </span><span class="hl-8">className</span><span class="hl-1">=</span><span class="hl-3">&quot;hint&quot;</span><span class="hl-6">&gt;</span><span class="hl-4">{</span><span class="hl-2">description</span><span class="hl-4">}</span><span class="hl-6">&lt;/</span><span class="hl-18">span</span><span class="hl-6">&gt;</span><span class="hl-4">}</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;/</span><span class="hl-18">div</span><span class="hl-6">&gt;</span><br/><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>Step 3: Register the slot</strong></p>
+<p>Pass your component to <code>OneSlotFactory</code> and wrap your form.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">OneSlotFactory</span><span class="hl-1">, </span><span class="hl-2">One</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MyTextInput</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;./MyTextInput&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">ProfileForm</span><span class="hl-1"> = () </span><span class="hl-4">=&gt;</span><span class="hl-1"> (</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;</span><span class="hl-7">OneSlotFactory</span><span class="hl-1"> </span><span class="hl-8">Text</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">MyTextInput</span><span class="hl-4">}</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">One</span><span class="hl-1"> </span><span class="hl-8">fields</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">profileFields</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-8">handler</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">fetchProfile</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;/</span><span class="hl-7">OneSlotFactory</span><span class="hl-6">&gt;</span><br/><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="common-slot-props" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Common slot props<a href="#common-slot-props" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><p>All slot interfaces share a core set of props that <code>&lt;One /&gt;</code> passes automatically. You do not need to thread these through manually.</p>
+<p><strong>value / onChange</strong></p>
+<p><code>value</code> holds the current field value. <code>onChange(newValue)</code> commits the change back to the form state engine. You must call <code>onChange</code> for the form to stay consistent.</p>
+<p><strong>disabled / readonly</strong></p>
+<p><code>disabled</code> prevents interaction entirely. <code>readonly</code> prevents editing but allows focus and copy. Both come from <code>isDisabled</code> / <code>isReadonly</code> field config callbacks.</p>
+<p><strong>invalid / incorrect / dirty</strong></p>
+<p><code>invalid</code> is the string returned by <code>isInvalid</code>. <code>incorrect</code> is the string returned by <code>isIncorrect</code>. <code>dirty</code> is <code>true</code> only after the user has touched the field—use it to gate error display so errors don't flash on initial render.</p>
+<p><strong>title / placeholder / description</strong></p>
+<p><code>title</code> is the field label. <code>placeholder</code> is the placeholder text. <code>description</code> is the helper text shown beneath the field.</p>
+<p><strong>loading</strong></p>
+<p><code>true</code> while the form's async <code>handler</code> is still resolving. Show a skeleton or spinner instead of an interactive control.</p>
+<a id="listslotfactory" class="tsd-anchor"></a><h2 class="tsd-anchor-link">ListSlotFactory<a href="#listslotfactory" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><code>ListSlotFactory</code> works the same way for <code>&lt;List /&gt;</code> columns. You replace the action buttons, row renderers, and header cells that the grid uses.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">ListSlotFactory</span><span class="hl-1">, </span><span class="hl-2">List</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MyBodyRow</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;./MyBodyRow&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">ContactList</span><span class="hl-1"> = () </span><span class="hl-4">=&gt;</span><span class="hl-1"> (</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;</span><span class="hl-7">ListSlotFactory</span><span class="hl-1"> </span><span class="hl-8">BodyRow</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">MyBodyRow</span><span class="hl-4">}</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">List</span><br/><span class="hl-1">      </span><span class="hl-8">columns</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">columns</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">handler</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">fetchContacts</span><span class="hl-4">}</span><br/><span class="hl-1">    </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;/</span><span class="hl-7">ListSlotFactory</span><span class="hl-6">&gt;</span><br/><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<blockquote>
+<p><strong>Note:</strong> Slot overrides for <code>&lt;List /&gt;</code> follow the same merge-with-outer-factory rule as <code>OneSlotFactory</code>.</p>
+</blockquote>
+<a id="using-a-pre-built-theme" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Using a pre-built theme<a href="#using-a-pre-built-theme" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p>If your goal is a visual redesign rather than custom business logic, <code>react-declarative-mantine</code> provides a complete <code>&lt;OneSlotFactory /&gt;</code> with all fields rebuilt using <a href="https://mantine.dev/">Mantine</a> components. Install it and wrap your app—your JSON schemas work without any changes.</p>
+<pre><code class="bash"><span class="hl-5">npm</span><span class="hl-1"> </span><span class="hl-3">install</span><span class="hl-1"> </span><span class="hl-3">react-declarative-mantine</span>
+</code><button type="button">Copy</button></pre>
+
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MantineSlotFactory</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative-mantine&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">One</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">App</span><span class="hl-1"> = () </span><span class="hl-4">=&gt;</span><span class="hl-1"> (</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;</span><span class="hl-7">MantineSlotFactory</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">One</span><span class="hl-1"> </span><span class="hl-8">fields</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">fields</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-8">handler</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-2">handler</span><span class="hl-4">}</span><span class="hl-1"> </span><span class="hl-6">/&gt;</span><br/><span class="hl-1">  </span><span class="hl-6">&lt;/</span><span class="hl-7">MantineSlotFactory</span><span class="hl-6">&gt;</span><br/><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<blockquote>
+<p><strong>Tip:</strong> Preview the Mantine theme at <a href="https://react-declarative-mantine.github.io/">react-declarative-mantine.github.io</a> before installing.</p>
+</blockquote>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#customizing-field-renderers-with-slotfactory"><span>Customizing field renderers with <wbr/>Slot<wbr/>Factory</span></a><ul><li><a href="#oneslotfactory"><span>One<wbr/>Slot<wbr/>Factory</span></a></li><li><ul><li><a href="#available-slots"><span>Available slots</span></a></li><li><a href="#writing-a-custom-slot"><span>Writing a custom slot</span></a></li><li><a href="#common-slot-props"><span>Common slot props</span></a></li></ul></li><li><a href="#listslotfactory"><span>List<wbr/>Slot<wbr/>Factory</span></a></li><li><a href="#using-a-pre-built-theme"><span>Using a pre-<wbr/>built theme</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="../modules.html">react-declarative</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

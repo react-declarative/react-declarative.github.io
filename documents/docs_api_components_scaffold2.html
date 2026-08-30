@@ -1,0 +1,134 @@
+<!DOCTYPE html><html class="default" lang="en" data-base=".."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>docs/api/components/scaffold2 | react-declarative</title><meta name="description" content="Documentation for react-declarative"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">react-declarative</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb"><li><a href="../modules.html">react-declarative</a></li><li><a href="docs_api_components_scaffold2.html">docs/api/components/scaffold2</a></li></ul></div><div class="tsd-panel tsd-typography"><a id="scaffold2-component-props-and-navigation-config" class="tsd-anchor"></a><h1 class="tsd-anchor-link">Scaffold2 component props and navigation config<a href="#scaffold2-component-props-and-navigation-config" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h1><p><code>Scaffold2</code> is an application shell component. It renders a sidebar with grouped navigation items, an optional search field, a top toolbar with action buttons, and a content area where you render your page content as <code>children</code>. Navigation items are defined as a tree of groups, options, and nested sub-options — all with async visibility and disabled predicates so you can gate items behind permission checks. The component is generic over a <code>Payload</code> type that is threaded through all visibility and action callbacks.</p>
+<pre><code class="tsx"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">Scaffold2</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;react-declarative&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">HomeIcon</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;@mui/icons-material/Home&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">PeopleIcon</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;@mui/icons-material/People&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-0">default</span><span class="hl-1"> </span><span class="hl-4">function</span><span class="hl-1"> </span><span class="hl-5">AppShell</span><span class="hl-1">() {</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> (</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;</span><span class="hl-7">Scaffold2</span><br/><span class="hl-1">      </span><span class="hl-8">appName</span><span class="hl-1">=</span><span class="hl-3">&quot;My App&quot;</span><br/><span class="hl-1">      </span><span class="hl-8">activeOptionPath</span><span class="hl-1">=</span><span class="hl-3">&quot;home&quot;</span><br/><span class="hl-1">      </span><span class="hl-8">options</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-9">[</span><br/><span class="hl-9">        {</span><br/><span class="hl-9">          </span><span class="hl-2">id:</span><span class="hl-9"> </span><span class="hl-3">&quot;main&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">          </span><span class="hl-2">label:</span><span class="hl-9"> </span><span class="hl-3">&quot;Main&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">          </span><span class="hl-2">children:</span><span class="hl-9"> [</span><br/><span class="hl-9">            {</span><br/><span class="hl-9">              </span><span class="hl-2">id:</span><span class="hl-9"> </span><span class="hl-3">&quot;home&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">              </span><span class="hl-2">label:</span><span class="hl-9"> </span><span class="hl-3">&quot;Home&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">              </span><span class="hl-2">icon:</span><span class="hl-9"> </span><span class="hl-2">HomeIcon</span><span class="hl-9">,</span><br/><span class="hl-9">            },</span><br/><span class="hl-9">            {</span><br/><span class="hl-9">              </span><span class="hl-2">id:</span><span class="hl-9"> </span><span class="hl-3">&quot;users&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">              </span><span class="hl-2">label:</span><span class="hl-9"> </span><span class="hl-3">&quot;Users&quot;</span><span class="hl-9">,</span><br/><span class="hl-9">              </span><span class="hl-2">icon:</span><span class="hl-9"> </span><span class="hl-2">PeopleIcon</span><span class="hl-9">,</span><br/><span class="hl-9">              </span><span class="hl-5">isVisible</span><span class="hl-2">:</span><span class="hl-9"> </span><span class="hl-4">async</span><span class="hl-9"> (</span><span class="hl-2">payload</span><span class="hl-9">) </span><span class="hl-4">=&gt;</span><span class="hl-9"> </span><span class="hl-2">payload</span><span class="hl-9">.</span><span class="hl-2">isAdmin</span><span class="hl-9">,</span><br/><span class="hl-9">            },</span><br/><span class="hl-9">          ],</span><br/><span class="hl-9">        },</span><br/><span class="hl-9">      ]</span><span class="hl-4">}</span><br/><span class="hl-1">      </span><span class="hl-8">onOptionClick</span><span class="hl-1">=</span><span class="hl-4">{</span><span class="hl-9">(</span><span class="hl-2">path</span><span class="hl-9">, </span><span class="hl-2">id</span><span class="hl-9">) </span><span class="hl-4">=&gt;</span><span class="hl-9"> {</span><br/><span class="hl-9">        </span><span class="hl-2">console</span><span class="hl-9">.</span><span class="hl-5">log</span><span class="hl-9">(</span><span class="hl-3">&quot;navigated to&quot;</span><span class="hl-9">, </span><span class="hl-2">id</span><span class="hl-9">);</span><br/><span class="hl-9">      }</span><span class="hl-4">}</span><br/><span class="hl-1">    </span><span class="hl-6">&gt;</span><br/><span class="hl-1">      </span><span class="hl-6">&lt;</span><span class="hl-18">main</span><span class="hl-6">&gt;</span><span class="hl-1">Page content goes here</span><span class="hl-6">&lt;/</span><span class="hl-18">main</span><span class="hl-6">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">&lt;/</span><span class="hl-7">Scaffold2</span><span class="hl-6">&gt;</span><br/><span class="hl-1">  );</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<a id="core-props" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Core props<a href="#core-props" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>options</code></strong> <code>IScaffold2Group&lt;T&gt;[]</code> <em>(required)</em></p>
+<p>The navigation tree. Each element is a top-level group that contains one or more option items. Groups can be labelled sections in the sidebar; options are the clickable navigation entries.</p>
+<hr>
+<p><strong><code>activeOptionPath</code></strong> <code>string</code> <em>(required)</em></p>
+<p>The dot-separated path string of the currently active option (e.g. <code>&quot;main.users&quot;</code>). <code>Scaffold2</code> uses this to highlight the selected item in the sidebar.</p>
+<hr>
+<p><strong><code>children</code></strong> <code>React.ReactNode</code> <em>(required)</em></p>
+<p>The page content rendered in the main content area to the right of the sidebar.</p>
+<hr>
+<p><strong><code>appName</code></strong> <code>string</code></p>
+<p>Application name displayed at the top of the sidebar. Defaults to <code>&quot;Scaffold2&quot;</code>.</p>
+<hr>
+<p><strong><code>payload</code></strong> <code>T</code></p>
+<p>Context object passed to every <code>isVisible</code> and <code>isDisabled</code> callback in the options tree and actions array. Use it to carry user roles, feature flags, or tenant context without prop-drilling.</p>
+<hr>
+<p><strong><code>actions</code></strong> <code>IScaffold2Action&lt;T&gt;[]</code></p>
+<p>Toolbar action buttons rendered at the top right. Each action extends <code>IOption</code> and adds <code>isVisible(payload)</code> and <code>isDisabled(payload)</code> predicates. The <code>action</code> string is forwarded to <code>onAction</code> when clicked.</p>
+<hr>
+<p><strong><code>activeTabPath</code></strong> <code>string</code></p>
+<p>The dot-separated path of the currently active tab within the active option. Use this when an option has <code>tabs</code> defined.</p>
+<hr>
+<p><strong><code>loading</code></strong> <code>boolean | number</code></p>
+<p>When truthy, renders a loading indicator in the sidebar. Pass a number to show determinate progress.</p>
+<hr>
+<a id="iscaffold2group-shape" class="tsd-anchor"></a><h2 class="tsd-anchor-link"><code>IScaffold2Group</code> shape<a href="#iscaffold2group-shape" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Each entry in <code>options</code> must conform to this structure.</p>
+<p><strong><code>id</code></strong> <code>string</code> <em>(required)</em></p>
+<p>Unique identifier for the group, used when constructing path strings.</p>
+<hr>
+<p><strong><code>label</code></strong> <code>string</code></p>
+<p>Human-readable group heading shown in the sidebar. Omit to render the group without a visible heading.</p>
+<hr>
+<p><strong><code>icon</code></strong> <code>React.ComponentType</code></p>
+<p>Icon component rendered next to the group label.</p>
+<hr>
+<p><strong><code>noHeader</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, the group heading row is suppressed and only the child option items are rendered.</p>
+<hr>
+<p><strong><code>isVisible</code></strong> <code>() =&gt; boolean | Promise&lt;boolean&gt;</code></p>
+<p>Async predicate that controls whether the entire group (and all its children) is shown. Evaluated once on mount and after each <code>deps</code> change.</p>
+<hr>
+<p><strong><code>isDisabled</code></strong> <code>() =&gt; boolean | Promise&lt;boolean&gt;</code></p>
+<p>Async predicate that disables all items in the group when it resolves to <code>true</code>.</p>
+<hr>
+<p><strong><code>children</code></strong> <code>IScaffold2Option&lt;T&gt;[]</code> <em>(required)</em></p>
+<p>Navigation options belonging to this group.</p>
+<hr>
+<a id="iscaffold2option-shape" class="tsd-anchor"></a><h2 class="tsd-anchor-link"><code>IScaffold2Option</code> shape<a href="#iscaffold2option-shape" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>id</code></strong> <code>string</code> <em>(required)</em></p>
+<p>Unique identifier for the option. Contributes to the path string (e.g. group <code>&quot;main&quot;</code> + option <code>&quot;users&quot;</code> → path <code>&quot;main.users&quot;</code>).</p>
+<hr>
+<p><strong><code>label</code></strong> <code>React.ReactNode</code></p>
+<p>Display label for the navigation item.</p>
+<hr>
+<p><strong><code>icon</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Icon rendered to the left of the label in the sidebar.</p>
+<hr>
+<p><strong><code>isVisible</code></strong> <code>(payload: T) =&gt; boolean | Promise&lt;boolean&gt;</code></p>
+<p>Controls visibility of this specific option. Receives the current <code>payload</code>.</p>
+<hr>
+<p><strong><code>isDisabled</code></strong> <code>(payload: T) =&gt; boolean | Promise&lt;boolean&gt;</code></p>
+<p>Controls whether this option is interactive. A disabled option is rendered but cannot be clicked.</p>
+<hr>
+<p><strong><code>tabs</code></strong> <code>IScaffold2Tab&lt;T&gt;[]</code></p>
+<p>Sub-tabs displayed below the option label when the option is active. Each tab has <code>id</code>, optional <code>label</code>, optional <code>icon</code>, and <code>isVisible</code>/<code>isDisabled</code>/<code>isActive</code> predicates that all receive <code>payload</code>.</p>
+<hr>
+<p><strong><code>options</code></strong> <code>IScaffold2Option&lt;T&gt;[]</code></p>
+<p>Nested child options. Use to build multi-level sidebar trees.</p>
+<hr>
+<a id="callbacks" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Callbacks<a href="#callbacks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>onOptionClick</code></strong> <code>(path: string, id: string) =&gt; void | boolean | undefined</code></p>
+<p>Called when a navigation option is clicked. <code>path</code> is the full dot-separated path; <code>id</code> is the option's own <code>id</code>. Return <code>false</code> to prevent the default active-path update.</p>
+<hr>
+<p><strong><code>onOptionGroupClick</code></strong> <code>(path: string, id: string) =&gt; void | boolean | undefined</code></p>
+<p>Called when a group header is clicked.</p>
+<hr>
+<p><strong><code>onTabChange</code></strong> <code>(path: string, tab: string, id: string) =&gt; void</code></p>
+<p>Called when the user switches tabs within an active option. <code>tab</code> is the selected tab's <code>id</code>.</p>
+<hr>
+<p><strong><code>onAction</code></strong> <code>(name: string) =&gt; void</code></p>
+<p>Called when a toolbar action button is activated. <code>name</code> is the <code>action</code> string from the matching <code>IScaffold2Action</code>.</p>
+<hr>
+<p><strong><code>onInit</code></strong> <code>() =&gt; void | Promise&lt;void&gt;</code></p>
+<p>Called once on component mount. Use it to trigger initial data loads.</p>
+<hr>
+<p><strong><code>onLoadStart</code></strong> <code>() =&gt; void</code></p>
+<p>Called before an async <code>isVisible</code>/<code>isDisabled</code> evaluation begins.</p>
+<hr>
+<p><strong><code>onLoadEnd</code></strong> <code>(isOk: boolean) =&gt; void</code></p>
+<p>Called after an async evaluation completes. <code>isOk</code> is <code>false</code> if it threw.</p>
+<hr>
+<p><strong><code>fallback</code></strong> <code>(e: Error) =&gt; void</code></p>
+<p>Error handler invoked if an async predicate or <code>onInit</code> rejects.</p>
+<hr>
+<a id="slot-components" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Slot components<a href="#slot-components" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>AfterAppName</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered immediately after the app name in the sidebar header.</p>
+<hr>
+<p><strong><code>BeforeSearch</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered above the sidebar search field.</p>
+<hr>
+<p><strong><code>AfterSearch</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered below the sidebar search field.</p>
+<hr>
+<p><strong><code>BeforeMenuContent</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered before the navigation option list.</p>
+<hr>
+<p><strong><code>AfterMenuContent</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered after the navigation option list.</p>
+<hr>
+<p><strong><code>BeforeContent</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered before the main <code>children</code> content area.</p>
+<hr>
+<p><strong><code>AfterContent</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Custom content rendered after the main <code>children</code> content area.</p>
+<hr>
+<p><strong><code>Copyright</code></strong> <code>React.ComponentType&lt;any&gt;</code></p>
+<p>Copyright notice component rendered at the bottom of the sidebar.</p>
+<hr>
+<a id="flags" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Flags<a href="#flags" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2><p><strong><code>noSearch</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, the search field in the sidebar is hidden. Defaults to <code>false</code>.</p>
+<hr>
+<p><strong><code>noAppName</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, the app name display is hidden. Defaults to <code>false</code>.</p>
+<hr>
+<p><strong><code>fixedHeader</code></strong> <code>boolean</code></p>
+<p>When <code>true</code>, the top bar remains fixed as the content area scrolls.</p>
+<hr>
+<p><strong><code>dense</code></strong> <code>boolean</code></p>
+<p>Reduces vertical padding on navigation items for a more compact sidebar.</p>
+<hr>
+<p><strong><code>deps</code></strong> <code>any[]</code></p>
+<p>Dependency array. Changing any value in this array re-evaluates all async <code>isVisible</code> / <code>isDisabled</code> predicates in the options tree.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#scaffold2-component-props-and-navigation-config"><span>Scaffold2 component props and navigation config</span></a><ul><li><a href="#core-props"><span>Core props</span></a></li><li><a href="#iscaffold2group-shape"><span>IScaffold2<wbr/>Group shape</span></a></li><li><a href="#iscaffold2option-shape"><span>IScaffold2<wbr/>Option shape</span></a></li><li><a href="#callbacks"><span>Callbacks</span></a></li><li><a href="#slot-components"><span>Slot components</span></a></li><li><a href="#flags"><span>Flags</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="../modules.html">react-declarative</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

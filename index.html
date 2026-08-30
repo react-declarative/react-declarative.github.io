@@ -1,93 +1,24 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Webpack App</title><meta name="viewport" content="width=device-width,initial-scale=1"/><style>html, body {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  * {
-    box-sizing: border-box;
-  }</style><script>/* globals window */
-  /* eslint-disable no-underscore-dangle */
-  try {
-    if (window.top !== window) {
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('unable to connect to top frame for connecting dev tools');
-  }
-
-  window.onerror = function onerror(message, source, line, column, err) {
-    if (window.CONFIG_TYPE !== 'DEVELOPMENT') return;
-    // eslint-disable-next-line no-var, vars-on-top
-    var xhr = new window.XMLHttpRequest();
-    xhr.open('POST', '/runtime-error');
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(
-      JSON.stringify({
-        /* eslint-disable object-shorthand */
-        message: message,
-        source: source,
-        line: line,
-        column: column,
-        error: err && { message: err.message, name: err.name, stack: err.stack },
-        origin: 'manager',
-        /* eslint-enable object-shorthand */
-      })
-    );
-  };</script><style>#root[hidden],
-      #docs-root[hidden] {
-        display: none !important;
-      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['CONFIG_TYPE'] = "PRODUCTION";
-          
-      
-          
-            window['LOGLEVEL'] = "info";
-          
-      
-          
-            window['FEATURES'] = {"postcss":true,"emotionAlias":true,"warnOnLegacyHierarchySeparator":true};</script><script src="runtime~main.91a0c7330ab317d35c4a.manager.bundle.js"></script><script src="vendors~main.f7f16cebbf3aa96a4f89.manager.bundle.js"></script><script src="main.ba5702ff43966b9c541c.manager.bundle.js"></script></body></html><script>(function() {
-
-    const rnd = () => (Math.random() + 1).toString(36).substring(7);
-
-    const main = () => {
-        const EXPANDED_CLASS = `preview-head-expanded-${rnd()}`;
-        const observer = new MutationObserver(() => {
-            const expandButtons = [...document.querySelectorAll('button[type=button] > span')]
-                .filter((el) => el.innerHTML === 'RAW')
-                .map((el) => el.closest('button'));
-            for (const button of expandButtons) {
-                if (!button.classList.contains(EXPANDED_CLASS)) {
-                    button.classList.add(EXPANDED_CLASS);
-                    button.click();
-                }
-            }
-        });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
-    };
-
-    document.addEventListener('DOMContentLoaded', main);
-})();
-</script>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(97575342, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/97575342" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<!DOCTYPE html><html class="default" lang="en" data-base="."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>react-declarative</title><meta name="description" content="Documentation for react-declarative"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">react-declarative</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>react-declarative</h1></div><div class="tsd-panel tsd-typography"><a id="react-declarative-docs-schema-driven-react-ui-library" class="tsd-anchor"></a><h1 class="tsd-anchor-link">react-declarative docs: schema-driven React UI library<a href="#react-declarative-docs-schema-driven-react-ui-library" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>react-declarative is a TypeScript React library that turns JSON field schemas into fully functional MUI-based forms, data grids, and application shells — with zero manual state wiring. Define your UI declaratively, and the library handles rendering, validation, and state management automatically.</p>
+<ul>
+<li><a href="documents/installation.html">Installation</a> — Install react-declarative and its MUI peer dependencies in minutes.</li>
+<li><a href="documents/quickstart.html">Quick Start</a> — Build your first declarative form in under five minutes.</li>
+<li><a href="documents/docs_concepts_field-types.html">Field Types</a> — Explore all 40+ field types: text, combo, date, rating, file, and more.</li>
+<li><a href="documents/docs_api_components_one.html">Component Reference</a> — Full prop reference for One, List, Scaffold2, KanbanView, and WizardView.</li>
+</ul>
+<a id="what-you-can-build" class="tsd-anchor"></a><h2 class="tsd-anchor-link">What you can build<a href="#what-you-can-build" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>react-declarative is not just a form library. It provides a complete toolkit for building data-driven React applications:</p>
+<ul>
+<li><a href="documents/docs_components_one.html">Forms &amp; Validation</a> — Nested grid forms with inline validation, conditional fields, and file uploads.</li>
+<li><a href="documents/docs_components_list.html">Data Grids</a> — Filterable, sortable, paginated data grids with mobile-first adaptive layout.</li>
+<li><a href="documents/docs_components_scaffold.html">App Shells</a> — Material Design app shells with navigation, tabs, and action menus from config.</li>
+<li><a href="documents/docs_components_kanban.html">Kanban Boards</a> — Drag-and-drop kanban boards with real-time column updates.</li>
+</ul>
+<a id="how-it-works" class="tsd-anchor"></a><h2 class="tsd-anchor-link">How it works<a href="#how-it-works" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
+<li><strong>Install the library</strong> — Add react-declarative and its MUI peer dependencies to your project.</li>
+<li><strong>Define a field schema</strong> — Write a <code>TypedField[]</code> array describing your form fields, layouts, and validation rules.</li>
+<li><strong>Render with One or List</strong> — Pass your schema to <code>&lt;One /&gt;</code> for forms or <code>&lt;List /&gt;</code> for data grids. State is managed automatically.</li>
+<li><strong>Connect your data</strong> — Provide a <code>handler</code> function (async or sync) to load initial data, and an <code>onChange</code> callback to receive updates.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> Try react-declarative in your browser without installing anything at the <a href="https://react-declarative-playground.github.io/">interactive playground</a>.</p>
+</blockquote>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#react-declarative-docs-schema-driven-react-ui-library"><span>react-<wbr/>declarative docs: schema-<wbr/>driven <wbr/>React UI library</span></a><ul><li><a href="#what-you-can-build"><span>What you can build</span></a></li><li><a href="#how-it-works"><span>How it works</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">react-declarative</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
